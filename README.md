@@ -82,6 +82,12 @@ RAJAONGKIR_KEY=0df6d5bf733214af6c6644eb8717c92c **(API Key Raja Ongkir)**<br>
 #### JWT
 JWT_SECRET=3Foc5AfwVbXoPIuDWEWDWIHeKEze9x26Pgp9Kq4tb9UPv2ivOZd2CBx9eufR3MeZ **(JWT Secret Key)**
 
+## Dummy Account Login
+
+Berikut ini adalah dummy untuk account login:<br>
+email: `admin@dot.co.id`<br>
+password: `password`<br>
+
 ## Postman Collection & Enviroment
 
 Postman collection & enviroment dapat diambil dalam folder `postman`
