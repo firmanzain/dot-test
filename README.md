@@ -65,6 +65,7 @@ Buka proyek di browser: `http://localhost:8000`.
 #### Konfigurasi APP
 APP_ENV=production **(ENV Application)**<br>
 APP_DEBUG=false **(Debug Application)**<br>
+SEARCH_FROM_DB=true **(Enviroment untuk swap searching dari DB atau API; Jika true maka search dari DB, jika false maka dari API)**<br>
 
 #### Konfigurasi Database
 DB_CONNECTION=mysql **(Tipe Database)**<br>
