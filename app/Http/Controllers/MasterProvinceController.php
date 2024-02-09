@@ -39,8 +39,16 @@ class MasterProvinceController extends Controller
                 $provinceId = $request->input('id');
                 $provinces = MasterProvinces::find($provinceId);
                 if (!$provinces) {
-                    return response()->json(['message' => 'error.not_found'], 404);
+                    return response()->json([
+                        'message' => 'error.not_found',
+                        'errors' => [
+                            'id' => [
+                                'error.not_found'
+                            ],
+                        ]
+                    ], 404);
                 }
+                $provinces = [$provinces];
             }
         }
 

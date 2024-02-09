@@ -39,8 +39,16 @@ class MasterCityController extends Controller
                 $provinceId = $request->input('id');
                 $cities = MasterCities::with('province')->find($provinceId);
                 if (!$cities) {
-                    return response()->json(['message' => 'error.not_found'], 404);
+                    return response()->json([
+                        'message' => 'error.not_found',
+                        'errors' => [
+                            'id' => [
+                                'error.not_found'
+                            ],
+                        ]
+                    ], 404);
                 }
+                $cities = [$cities];
             }
         }
 

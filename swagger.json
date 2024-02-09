@@ -1,0 +1,341 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "DOT TEST WEB API",
+        "description": "Swagger service WEB API DOT TEST",
+        "contact": {
+            "name": "Firman Zain",
+            "email": "firmanzainf@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8080",
+            "description": "Local server"
+        }
+    ],
+    "paths": {
+        "/search/provinces": {
+            "get": {
+                "summary": "Master Provinces",
+                "description": "API service show data provinces",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_get_province"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_province_success"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_province_error_400"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_province_error_404"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/search/cities": {
+            "get": {
+                "summary": "Master Cites",
+                "description": "API service show data cities",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_get_cities"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_city_success"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_city_error_400"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_get_city_error_404"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "parameters": {
+            "id": {
+                "in": "query",
+                "name": "id",
+                "description": "Id data",
+                "schema": {
+                    "type": "number"
+                },
+                "example": 1
+            }
+        },
+        "schemas": {
+            "response_error_default": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "Error message"
+                    },
+                    "errors": {
+                        "type": "array",
+                        "description": "Details errors"
+                    }
+                }
+            },
+            "response_get_province": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "description": "Data response",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "Id province"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name province"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp data created"
+                                },
+                                "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp data updated"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "response_get_cities": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "array",
+                        "description": "Data response",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "number",
+                                    "description": "Id city"
+                                },
+                                "province_id": {
+                                    "type": "number",
+                                    "description": "Id province"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Name city"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "enum": [
+                                        "Kota", "Kabupaten"
+                                    ],
+                                    "description": "Type city"
+                                },
+                                "postal_code": {
+                                    "type": "string",
+                                    "description": "Postal code city"
+                                },
+                                "created_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp data created"
+                                },
+                                "updated_at": {
+                                    "type": "string",
+                                    "format": "date-time",
+                                    "description": "Timestamp data updated"
+                                },
+                                "province": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "number",
+                                            "description": "Id province"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Name province"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "Timestamp data created"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "description": "Timestamp data updated"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "examples": {
+            "response_get_province_error_400": {
+                "value": {
+                    "message": "error.invalid",
+                    "errors": {
+                        "id": [
+                            "error.invalid"
+                        ]
+                    }
+                }
+            },
+            "response_get_province_error_404": {
+                "value": {
+                    "message": "error.not_found",
+                    "errors": {
+                        "id": [
+                            "error.not_found"
+                        ]
+                    }
+                }
+            },
+            "response_get_province_success": {
+                "value": {
+                    "data": [
+                        {
+                            "id": 1,
+                            "name": "Bali",
+                            "created_at": "2024-02-09T04:08:09.000000Z",
+                            "updated_at": "2024-02-09T04:08:09.000000Z"
+                        }
+                    ]
+                }
+            },
+            "response_get_city_error_400": {
+                "value": {
+                    "message": "error.invalid",
+                    "errors": {
+                        "id": [
+                            "error.invalid"
+                        ]
+                    }
+                }
+            },
+            "response_get_city_error_404": {
+                "value": {
+                    "message": "error.not_found",
+                    "errors": {
+                        "id": [
+                            "error.not_found"
+                        ]
+                    }
+                }
+            },
+            "response_get_city_success": {
+                "value": {
+                    "data": [
+                        {
+                            "id": 1,
+                            "province_id": 21,
+                            "name": "Aceh Barat",
+                            "type": "Kabupaten",
+                            "postal_code": "23681",
+                            "created_at": "2024-02-09T04:08:40.000000Z",
+                            "updated_at": "2024-02-09T04:08:40.000000Z",
+                            "province": {
+                                "id": 21,
+                                "name": "Nanggroe Aceh Darussalam (NAD)",
+                                "created_at": "2024-02-09T04:08:10.000000Z",
+                                "updated_at": "2024-02-09T04:08:10.000000Z"
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,7 @@
 # DOT Test
 
 ## Deskripsi
-Implementasi Web Service dengan integrasi API Rajaongkir.
+Implementasi Web Service dengan integrasi API Raja Ongkir.
 
 ## Panduan Instalasi
 
@@ -63,3 +63,7 @@ DB_PASSWORD=password **(Password Database)**<br>
 #### API Raja Ongkir
 RAJAONGKIR_URL=https://api.rajaongkir.com/starter **(URL Raja Ongkir)**<br>
 RAJAONGKIR_KEY=0df6d5bf733214af6c6644eb8717c92c **(API Key Raja Ongkir)**<br>
+
+## Swagger
+
+Detail request & response API Service dapat dilihat pada file `swagger.json`.
