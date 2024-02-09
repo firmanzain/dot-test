@@ -33,12 +33,22 @@ Buat database sesuai konfigurasi di `.env`.
 composer install
 ```
 
-7. Jalankan Migrasi<br>
+7. Generate JWT Secret<br>
+```sh
+php artisan jwt:secret
+```
+
+8. Jalankan Migrasi<br>
 ```sh
 php artisan migrate
 ```
 
-8. Jalankan Fetch Data Raja Ongkir<br>
+9. Jalankan Migrasi<br>
+```sh
+php artisan db:seed
+```
+
+10. Jalankan Fetch Data Raja Ongkir<br>
 ```sh
 php artisan fetch:data-province
 php artisan fetch:data-cities
@@ -52,6 +62,10 @@ Buka proyek di browser: `http://localhost:8000`.
 
 ## Enviroment Variabel
 
+#### Konfigurasi APP
+APP_ENV=production **(ENV Application)**<br>
+APP_DEBUG=false **(Debug Application)**<br>
+
 #### Konfigurasi Database
 DB_CONNECTION=mysql **(Tipe Database)**<br>
 DB_HOST=localhost **(Host Database)**<br>
@@ -63,6 +77,13 @@ DB_PASSWORD=password **(Password Database)**<br>
 #### API Raja Ongkir
 RAJAONGKIR_URL=https://api.rajaongkir.com/starter **(URL Raja Ongkir)**<br>
 RAJAONGKIR_KEY=0df6d5bf733214af6c6644eb8717c92c **(API Key Raja Ongkir)**<br>
+
+#### JWT
+JWT_SECRET=3Foc5AfwVbXoPIuDWEWDWIHeKEze9x26Pgp9Kq4tb9UPv2ivOZd2CBx9eufR3MeZ **(JWT Secret Key)**
+
+## Postman Collection & Enviroment
+
+Postman collection & enviroment dapat diambil dalam folder `postman`
 
 ## Swagger
 
