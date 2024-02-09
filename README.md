@@ -1,32 +1,65 @@
 # DOT Test
 
+## Deskripsi
 Implementasi Web Service dengan integrasi API Rajaongkir.
 
 ## Panduan Instalasi
 
-## Konfigurasi env
+Sebelum memulai instalasi proyek, pastikan Komputer telah terinstall **PHP** dan **Composer**.
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+1. Clone Repository<br>
+```sh
+git clone https://github.com/firmanzain/dot-test.git
+```
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+2. Masuk ke Direktory Proyek<br>
+```sh
+cd dot-test
+```
 
-> **Note:** In the years since releasing Lumen, PHP has made a variety of wonderful performance improvements. For this reason, along with the availability of [Laravel Octane](https://laravel.com/docs/octane), we no longer recommend that you begin new projects with Lumen. Instead, we recommend always beginning new projects with [Laravel](https://laravel.com).
+3. Copy .env.example ke .env<br>
+```sh
+cp .env.example .env
+```
 
-## Official Documentation
+4. Konfigurasi .env<br>
+Buka dan atur file .env sesuai konfigurasi database & API Key dai Raja Ongkir.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+5. Buat Database<br>
+Buat database sesuai konfigurasi di `.env`.
 
-## Contributing
+6. Instal Dependencies<br>
+```sh
+composer install
+```
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+7. Jalankan Migrasi<br>
+```sh
+php artisan migrate
+```
 
-## Security Vulnerabilities
+8. Jalankan Fetch Data Raja Ongkir<br>
+```sh
+php artisan fetch:data-province
+php artisan fetch:data-cities
+```
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+9. Jalankan Server Lokal<br>
+```sh
+php artisan serve
+```
+Buka proyek di browser: `http://localhost:8000`.
 
-## License
+## Enviroment Variabel
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Konfigurasi Database
+DB_CONNECTION=mysql **(Tipe Database)**<br>
+DB_HOST=localhost **(Host Database)**<br>
+DB_PORT=3306 **(Port Database)**<br>
+DB_DATABASE=dot_test **(Nama Database)**<br>
+DB_USERNAME=dot_test **(User Database)**<br>
+DB_PASSWORD=password **(Password Database)**<br>
+
+#### API Raja Ongkir
+RAJAONGKIR_URL=https://api.rajaongkir.com/starter **(URL Raja Ongkir)**<br>
+RAJAONGKIR_KEY=0df6d5bf733214af6c6644eb8717c92c **(API Key Raja Ongkir)**<br>
