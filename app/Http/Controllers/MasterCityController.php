@@ -29,9 +29,13 @@ class MasterCityController extends Controller
             if ($validator->fails()) {
                 $errors = $validator->errors()->toArray();
                 $firstError = reset($errors);
+                $errorsResponse = [];
+                foreach ($errors as $key => $value) {
+                    $errorsResponse[$key] = $value[0];
+                }
                 return response()->json([
                     'message' => $firstError[0],
-                    'errors' => $errors,
+                    'errors' => $errorsResponse,
                 ], 400);
             }
 
@@ -42,9 +46,7 @@ class MasterCityController extends Controller
                     return response()->json([
                         'message' => 'error.not_found',
                         'errors' => [
-                            'id' => [
-                                'error.not_found'
-                            ],
+                            'id' => 'error.not_found',
                         ]
                     ], 404);
                 }

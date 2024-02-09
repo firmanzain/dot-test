@@ -11,15 +11,87 @@
     },
     "servers": [
         {
-            "url": "http://localhost:8080",
+            "url": "http://localhost:8080/api",
             "description": "Local server"
         }
     ],
     "paths": {
+        "/login": {
+            "post": {
+                "summary": "Login",
+                "description": "API service login user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/request_login"
+                            },
+                            "examples": {
+                                "request": {
+                                    "$ref": "#/components/examples/request_login"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_login"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_login_success"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Error Bad Request Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_login_error_400"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Error Unauthorized Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_error_default"
+                                },
+                                "examples": {
+                                    "response": {
+                                        "$ref": "#/components/examples/response_login_error_401"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/search/provinces": {
             "get": {
                 "summary": "Master Provinces",
                 "description": "API service show data provinces",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/id"
@@ -78,6 +150,11 @@
             "get": {
                 "summary": "Master Cites",
                 "description": "API service show data cities",
+                "security": [
+                    {
+                        "BearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/id"
@@ -134,6 +211,13 @@
         }
     },
     "components": {
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        },
         "parameters": {
             "id": {
                 "in": "query",
@@ -154,7 +238,7 @@
                         "description": "Error message"
                     },
                     "errors": {
-                        "type": "array",
+                        "type": "object",
                         "description": "Details errors"
                     }
                 }
@@ -260,6 +344,72 @@
                         }
                     }
                 }
+            },
+            "request_login": {
+                "type": "object",
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "format": "email",
+                        "description": "Email login"
+                    },
+                    "password": {
+                        "type": "string",
+                        "minLength": 5,
+                        "maxLength": 20,
+                        "description": "Password login"
+                    }
+                }
+            },
+            "response_login": {
+                "type": "object",
+                "properties": {
+                    "access_token": {
+                        "type": "string",
+                        "description": "Bearer access token"
+                    },
+                    "token_type": {
+                        "type": "string",
+                        "description": "Type token"
+                    },
+                    "expires_in": {
+                        "type": "number",
+                        "description": "Expired token in seconds"
+                    },
+                    "user": {
+                        "type": "object",
+                        "description": "Data user login",
+                        "properties": {
+                            "id": {
+                                "type": "number",
+                                "description": "Id user"
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Name user"
+                            },
+                            "email": {
+                                "type": "string",
+                                "format": "email",
+                                "description": "Email user"
+                            },
+                            "created_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Timestamp data created"
+                            },
+                            "updated_at": {
+                                "type": "string",
+                                "format": "date-time",
+                                "description": "Timestamp data updated"
+                            }
+                        }
+                    }
+                }
             }
         },
         "examples": {
@@ -267,9 +417,7 @@
                 "value": {
                     "message": "error.invalid",
                     "errors": {
-                        "id": [
-                            "error.invalid"
-                        ]
+                        "id": "error.invalid"
                     }
                 }
             },
@@ -277,9 +425,7 @@
                 "value": {
                     "message": "error.not_found",
                     "errors": {
-                        "id": [
-                            "error.not_found"
-                        ]
+                        "id": "error.not_found"
                     }
                 }
             },
@@ -299,9 +445,7 @@
                 "value": {
                     "message": "error.invalid",
                     "errors": {
-                        "id": [
-                            "error.invalid"
-                        ]
+                        "id": "error.invalid"
                     }
                 }
             },
@@ -309,9 +453,7 @@
                 "value": {
                     "message": "error.not_found",
                     "errors": {
-                        "id": [
-                            "error.not_found"
-                        ]
+                        "id": "error.not_found"
                     }
                 }
             },
@@ -334,6 +476,40 @@
                             }
                         }
                     ]
+                }
+            },
+            "request_login": {
+                "value": {
+                    "email": "admin@dot.co.id",
+                    "password": "password"
+                }
+            },
+            "response_login_error_400": {
+                "value": {
+                    "message": "error.required",
+                    "errors": {
+                        "email": "error.required",
+                        "password": "error.required"
+                    }
+                }
+            },
+            "response_login_error_401": {
+                "value": {
+                    "message": "error.invalid"
+                }
+            },
+            "response_login_success": {
+                "value": {
+                    "access_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL2xvZ2luIiwiaWF0IjoxNzA3NDg5Njk2LCJleHAiOjE3MDc0OTMyOTYsIm5iZiI6MTcwNzQ4OTY5NiwianRpIjoiZFFDSzFoaVNJa0RqRTBTYyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.1lOb259YLTomsBn0V8h-TrPppXNbtc10LAAb4XSyK1U",
+                    "token_type": "bearer",
+                    "user": {
+                        "id": 1,
+                        "name": "admin",
+                        "email": "admin@dot.co.id",
+                        "created_at": "2024-02-09T14:03:35.000000Z",
+                        "updated_at": "2024-02-09T14:03:35.000000Z"
+                    },
+                    "expires_in": 86400
                 }
             }
         }
