@@ -15,4 +15,9 @@ class MasterCities extends Model
     protected $fillable = [
         'province_id', 'name', 'type', 'postal_code'
     ];
+
+    public function province()
+    {
+        return $this->belongsTo(MasterProvinces::class);
+    }
 }

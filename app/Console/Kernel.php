@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \App\Console\Commands\FetchDataProvince::class,
+        \App\Console\Commands\FetchDataProvinces::class,
         \App\Console\Commands\FetchDataCities::class
     ];
 

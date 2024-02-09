@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class MasterProvince extends Model
+class MasterProvinces extends Model
 {
 
     /**
@@ -15,4 +15,9 @@ class MasterProvince extends Model
     protected $fillable = [
         'name',
     ];
+
+    public function cities()
+    {
+        return $this->hasMany(MasterCities::class);
+    }
 }

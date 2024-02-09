@@ -4,11 +4,11 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use GuzzleHttp\Client;
-use App\Models\MasterProvince;
+use App\Models\MasterProvinces;
 
-class FetchDataProvince extends Command
+class FetchDataProvinces extends Command
 {
-    protected $name = 'fetch:data-province';
+    protected $name = 'fetch:data-provinces';
     
     public function handle()
     {
@@ -27,13 +27,13 @@ class FetchDataProvince extends Command
 
         if (isset($data['rajaongkir']['results']) && sizeof($data['rajaongkir']['results']) > 0) {
             foreach ($data['rajaongkir']['results'] as $key => $value) {
-                MasterProvince::updateOrCreate(
+                MasterProvinces::updateOrCreate(
                     ['id' => $value['province_id']],
                     ['name' => $value['province']]
                 );
             }
         }
 
-        $this->info('Data province successfully updated');
+        $this->info('Data provinces successfully updated');
     }
 }

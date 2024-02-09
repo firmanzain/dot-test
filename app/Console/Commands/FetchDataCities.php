@@ -8,7 +8,7 @@ use App\Models\MasterCities;
 
 class FetchDataCities extends Command
 {
-    protected $name = 'fetch:data-city';
+    protected $name = 'fetch:data-cities';
     
     public function handle()
     {

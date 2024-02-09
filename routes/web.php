@@ -16,3 +16,12 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+$router->group(['prefix' => 'search'], function () use ($router) {
+    $router->get('provinces', [
+        'uses' => 'MasterProvinceController@searchProvinces'
+    ]);
+    $router->get('cities', [
+        'uses' => 'MasterCityController@searchCities'
+    ]);
+});
