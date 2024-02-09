@@ -1,3 +1,5 @@
 .env
 # ignore vendor
 /vendor
+
+.phpunit*

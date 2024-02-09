@@ -17,11 +17,19 @@ $router->get('/', function () use ($router) {
     return $router->app->version();
 });
 
-$router->group(['prefix' => 'search'], function () use ($router) {
-    $router->get('provinces', [
-        'uses' => 'MasterProvinceController@searchProvinces'
-    ]);
-    $router->get('cities', [
-        'uses' => 'MasterCityController@searchCities'
-    ]);
+$router->group([
+    'prefix' => 'api',
+], function () use ($router) {
+    $router->post('login', 'AuthController@login');
+    $router->group([
+        'prefix' => 'search',
+        'middleware' => 'auth:api'
+    ], function () use ($router) {
+        $router->get('provinces', [
+            'uses' => 'MasterProvinceController@searchProvinces'
+        ]);
+        $router->get('cities', [
+            'uses' => 'MasterCityController@searchCities'
+        ]);
+    });
 });
