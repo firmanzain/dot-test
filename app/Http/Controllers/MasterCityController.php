@@ -21,7 +21,10 @@ class MasterCityController extends Controller
         if (empty($request->input())) {
             $cities = $this->searchCitiesFromDb($request);
         } else {
-            $this->validationRequest($request);
+            $valid = $this->validationRequest($request);
+            if (!$valid['status']) {
+                return response()->json($valid['errors'], 400);
+            }
 
             if ($request->input('id')) {
                 $cityId = $request->input('id');
@@ -59,11 +62,17 @@ class MasterCityController extends Controller
             foreach ($errors as $key => $value) {
                 $errorsResponse[$key] = $value[0];
             }
-            return response()->json([
-                'message' => $firstError[0],
-                'errors' => $errorsResponse,
-            ], 400);
+
+            return [
+                'status' => false,
+                'errors' => [
+                    'message' => $firstError[0],
+                    'errors' => $errorsResponse,
+                ]
+            ];
         }
+
+        return ['status' => true];
     }
 
     public function searchCitiesFromDb(Request $request, $id = '') {

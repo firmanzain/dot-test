@@ -12,12 +12,7 @@ class AuthController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['login', 'refresh', 'logout']]);
     }
-    /**
-     * Get a JWT via given credentials.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
+    
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
@@ -51,7 +46,7 @@ class AuthController extends Controller
 
         if (!$token = Auth::attempt($credentials)) {
             return response()->json([
-                'message' => 'error.invalid'
+                'message' => 'error.unauthorized'
             ], 401);
         }
 

@@ -89,3 +89,10 @@ Postman collection & enviroment dapat diambil dalam folder `postman`
 ## Swagger
 
 Detail request & response API Service dapat dilihat pada file `swagger.json`.
+
+## Unit Test
+
+Unit test dapat dijalankan dengan perintah:
+```sh
+./vendor/bin/phpunit
+```
